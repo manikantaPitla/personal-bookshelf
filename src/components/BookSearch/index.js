@@ -23,13 +23,14 @@ const BookSearch = ({ setBooksList, apiAction }) => {
           return {
             key: eachBook.key,
             title: eachBook.title,
-            author: eachBook.author_name[0],
+            author: eachBook.author_name ? eachBook.author_name[0] : "Unknown",
             edition_count: eachBook.edition_count,
+            added_to_shelf: false,
           };
         });
 
         const checkExistInBookshelf = () => {
-          const myBookshelf = JSON.parse(localStorage.getItem("myBookShelf"));
+          const myBookshelf = JSON.parse(localStorage.getItem("myBookShelf")) || [];
 
           for (const book of myBookshelf) {
             for (const bookItem of requiredData) {
